@@ -21,8 +21,6 @@ jobs:
           command: |
             . venv/bin/activate
             py.test --junitxml=/tmp/test-results/python.xml
-      - type: store_test_results
-          path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: python
