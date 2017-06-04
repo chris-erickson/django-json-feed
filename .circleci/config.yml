@@ -20,9 +20,9 @@ jobs:
       - run:
           command: |
             . venv/bin/activate
-            py.test --junitxml=/reports/pytest/pytest-report.xml
+            py.test --junitxml=/tmp/pytest/pytest-report.xml
       - store_test_results:
-          path: /reports
+          path: /tmp/reports
       - store_artifacts:
           path: /tmp/test-results
           destination: python
