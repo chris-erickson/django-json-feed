@@ -20,4 +20,6 @@ jobs:
       - run:
           command: |
             . venv/bin/activate
-            python3 py.test --junitxml=$CIRCLE_TEST_REPORTS/python/junit.xml
+            py.test --junitxml=/tmp/test-results/python.xml
+      - type: store_test_results
+          path: /tmp/test-results
