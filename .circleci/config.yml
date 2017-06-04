@@ -26,3 +26,7 @@ jobs:
       - store_artifacts:
           path: /tmp/pytest
           destination: python
+      - run:
+          command: |
+            . venv/bin/activate
+            coveralls
