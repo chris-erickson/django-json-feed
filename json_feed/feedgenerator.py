@@ -76,7 +76,7 @@ class JSONFeed(SyndicationFeed):
     def add_optional_root_elements(self):
         """Adds optional root parameters."""
         # TODO: Finish building this
-        self.feed.update({'test_optional': "the value" })
+        self.feed.update({'test_optional': "the value"})
 
     def remove_excess_root_elements(self):
         """Removes unused root parameters that django provides."""
@@ -88,12 +88,11 @@ class JSONFeed(SyndicationFeed):
             del self.feed[excess_key]
 
     def remove_empty_root_elements(self):
-        keys =  set(self.feed.keys())
+        keys = set(self.feed.keys())
 
         for key in keys:
             if not self.feed[key]:
                 del self.feed[key]
-
 
     def update_author(self):
         self.feed['author'] = {
