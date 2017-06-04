@@ -1,10 +1,10 @@
 import json
 
-from django.contrib.syndication.views import Feed
-from django.utils.feedgenerator import Atom1Feed, SyndicationFeed
+# from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import SyndicationFeed
 from django.core.serializers.json import DjangoJSONEncoder
 
-from .models import Post
+# from .models import Post
 
 
 class JSONFeed(SyndicationFeed):
@@ -76,7 +76,7 @@ class JSONFeed(SyndicationFeed):
     def add_optional_root_elements(self):
         """Adds optional root parameters."""
         # TODO: Finish building this
-        self.feed.update({'test_optional': "the value" })
+        self.feed.update({'test_optional': "the value"})
 
     def remove_excess_root_elements(self):
         """Removes unused root parameters that django provides."""
@@ -88,12 +88,11 @@ class JSONFeed(SyndicationFeed):
             del self.feed[excess_key]
 
     def remove_empty_root_elements(self):
-        keys =  set(self.feed.keys())
+        keys = set(self.feed.keys())
 
         for key in keys:
             if not self.feed[key]:
                 del self.feed[key]
-
 
     def update_author(self):
         self.feed['author'] = {
@@ -102,44 +101,45 @@ class JSONFeed(SyndicationFeed):
             'avatar': self.feed['author_avatar'],
         }
 
+# THIS IS EDITED IN THE PROJECT FOR NOW, UNLESS CREATING AND EXTENSION OF THAT BECOMES HELPFUL
 
-class PostFeed(Feed):
-    feed_type = JSONFeed
-    link = "/stuff/"
-
-    # Supplements to the JSON feed
-    title = "This is the title"
-    # Not provided by django
-    homepage_url = "https://homepage.com"
-    user_comment = "this is some comment"
-    next_url = "not sure what this should be yet"
-    icon = "icon"
-    favicon = "favicon"
-    expired = False
-    hubs = ""
-    author_avatar = "gravatar link or somehting"
-
-    def feed_extra_kwargs(self, obj):
-        """
-        Returns an extra keyword arguments dictionary that is used when
-        initializing the feed generator.
-        """
-        return {
-            "homepage_url": self.homepage_url,
-            "user_comment": self.user_comment,
-            "next_url": self.next_url,
-            "icon": self.icon,
-            "favicon": self.favicon,
-            "expired": self.expired,
-            "hubs": self.hubs,
-            "author_avatar": self.author_avatar,
-        }
-
-    def link(self):
-        return 'http://www.apple.com'
-
-    def items(self):
-        return Post.objects.order_by('-created')[:5]
-
-    def item_title(self, item):
-        return item.title
+# class PostFeed(Feed):
+#     feed_type = JSONFeed
+#     link = "/stuff/"
+#
+#     # Supplements to the JSON feed
+#     title = "This is the title"
+#     # Not provided by django
+#     homepage_url = "https://homepage.com"
+#     user_comment = "this is some comment"
+#     next_url = "not sure what this should be yet"
+#     icon = "icon"
+#     favicon = "favicon"
+#     expired = False
+#     hubs = ""
+#     author_avatar = "gravatar link or somehting"
+#
+#     def feed_extra_kwargs(self, obj):
+#         """
+#         Returns an extra keyword arguments dictionary that is used when
+#         initializing the feed generator.
+#         """
+#         return {
+#             "homepage_url": self.homepage_url,
+#             "user_comment": self.user_comment,
+#             "next_url": self.next_url,
+#             "icon": self.icon,
+#             "favicon": self.favicon,
+#             "expired": self.expired,
+#             "hubs": self.hubs,
+#             "author_avatar": self.author_avatar,
+#         }
+#
+#     def link(self):
+#         return 'http://www.apple.com'
+#
+#     def items(self):
+#         return Post.objects.order_by('-created')[:5]
+#
+#     def item_title(self, item):
+#         return item.title
