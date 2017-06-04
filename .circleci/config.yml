@@ -22,7 +22,7 @@ jobs:
             . venv/bin/activate
             py.test --junitxml=/tmp/pytest/pytest-report.xml
       - store_test_results:
-          path: /tmp/reports
+          path: /tmp/pytest
       - store_artifacts:
-          path: /tmp/test-results
+          path: /tmp/pytest
           destination: python
